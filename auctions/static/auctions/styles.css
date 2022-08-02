@@ -1,0 +1,73 @@
+body {
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(234, 250, 251);
+}
+
+.listings {
+    padding: 100px 0;
+}
+
+.listing-container {
+
+    height: 300px;
+    display: flex;
+    margin-bottom: 20px;
+    justify-content: space-between;
+    border-radius: 10px;
+    background-color: rgb(217, 255, 215);
+    border: 1px solid green;
+
+}
+
+.listing-container img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    border-right: 1px solid rgb(5, 75, 2);
+}
+
+.listing-container .listing-info {
+    width: 70%;
+}
+
+.listing-info {
+    margin-top: 20px;
+}
+.listing-info .title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.listing-info .price, .listing-info .desc {
+    font-size: 18px;
+}
+
+.listing-info .date {
+    margin-top: 35px;
+    color: grey;
+}
+
+input, textarea {
+    margin-bottom: 5px;
+}
+
+.view-img {
+    max-height: 300px;
+    border-radius: 10px;
+    border: 1px solid rgb(90, 78, 255)
+}
+
+.container {
+    display: flex;
+    max-width: 100%;
+    gap: 50px;
+}
+
+.bid-container {
+    padding-top: 41px;
+}
+
+.comments {
+    margin-top: 75px;
+}

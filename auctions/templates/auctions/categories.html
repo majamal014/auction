@@ -1,0 +1,11 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Categories</h2>
+    <ul>
+        <li><a href="{% url 'filter_cat' 'fashion' %}">Fashion</a></li>
+        <li><a href="{% url 'filter_cat' 'electronics' %}">Electronics</a></li>
+        <li><a href="{% url 'filter_cat' 'home' %}">Home</a></li>
+        <li><a href="{% url 'filter_cat' 'other' %}">Other</a></li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <div class="container">
+        <div>
+            <h2>Listing: {{ listing.title }}</h2>
+            {% if not listing.active %}
+                <h2 style="color: red">CLOSED</h2>
+            {% endif %}
+            {% if listing.image_url != '' %}
+                <img src="{{ listing.image_url }}" class="view-img">
+            {% endif %}
+            <p>{{ listing.description }}</p>
+            <div class="comments">
+                <h3>Comments:</h3>
+                {% for comment in comments %}
+                    <p>{{ comment.content }} - Made by {{ comment.user.username }} on {{ comment.date }}</p>
+                {% empty %}
+                    <p>No comments.</p>
+                {% endfor %}
+                {% if user.is_authenticated %}
+                    <form action="{% url 'comment' listing.id %}" method="POST">
+                        {% csrf_token %}
+                        <textarea name="content" cols="50" rows="5" placeholder="Add a comment..."></textarea><br>
+                        <input type="submit" value="Comment">
+                    </form>
+                {% endif %}
+            </div>
+            
+        </div>
+
+        <div class="bid-container">
+            {% if user.is_authenticated %}
+                <p><a href="{% url 'add_watchlist' listing.id %}">
+                    {% if not watchlisted %}
+                    Add to Watchlist
+                    {% else %}
+                    Remove from Watchlist
+                    {% endif %}
+                </a></p>
+                {% if creator and listing.active %}
+                    <p><a href="{% url 'close_listing' listing.id %}">Close Listing</a></p>
+                {% endif %}
+            {% endif %}
+            {% if highest_bid %}
+                <h3>${{ highest_bid.bid }}</h3>
+                {% if highest_bid.user == user and not listing.active %}
+                    <h3 style="color: lime">YOU WON!</h3>
+                {% endif %}
+            {% else %}
+                <h3>${{ listing.bid }}</h3>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+                {% if err %}
+                    <p style="color: red">Error - bid is less than current price</p>
+                {% endif %}
+                {% if listing.active %}
+                <form action="{% url 'view_listing' listing.id %}" method="POST">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        {{ field }}
+                    {% endfor %}
+                    <br>
+                    <input type="submit" value="Place Bid">
+                </form>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
